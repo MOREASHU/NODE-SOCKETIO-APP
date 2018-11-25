@@ -16,6 +16,17 @@ app.use(express.static(publicPath)); // middelware that serve the public folder
 
 io.on('connection', (socket) => {
     console.log('new user connected');
+
+    socket.emit('newMessage', {
+        from : 'aarti',
+        text: 'hey, hi',
+        createdAt : 123
+    });
+
+    socket.on('createMessage', (message) => {
+        console.log('createMessage',message);
+    })
+
     socket.on('disconnect',() => {
       console.log('user was disconnected');
     });
